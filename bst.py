@@ -15,12 +15,13 @@ class Node:
 @dataclass(frozen=True)
 class BinarySearchTree:
     x: BinTree
-    y: Callable[]
-    #
-    # def comes_before(self):
-    #     if l < v:
-    #
-    #     v < r
+    y: Callable[[any, any], bool]
+
+def comes_before(x, y):
+    return x < y
 
 def example_fun(x : int) -> bool:
     return x < 142
+
+def is_empty(bst: BinarySearchTree) -> bool:
+    return bst.x is None
