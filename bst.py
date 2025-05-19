@@ -17,6 +17,10 @@ class BinarySearchTree:
     bt: BinTree
     comes_before: Callable[[any, any], bool]
 
+def compare(x: int ,y: int) -> bool:
+    return x < y
+
+# extree: BinarySearchTree(None, compare)
 
 def is_empty(bst: BinarySearchTree) -> bool:
     return bst.x is None
@@ -37,6 +41,8 @@ def insert(bst: BinarySearchTree, value: any) -> BinarySearchTree:
     new_tree = insert_helper(bst.x, value, bst.y)
     return BinarySearchTree(new_tree, bst.y)
 
+def look_up(bst: BinarySearchTree, a: any) -> bool:
+    return BinarySearchTree(Node(10, None, None),)
 
 class TestBST(unittest.TestCase):
     def test_insert(self):
