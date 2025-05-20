@@ -23,7 +23,7 @@ def compare(x: int ,y: int) -> bool:
 # extree: BinarySearchTree(None, compare)
 
 def is_empty(bst: BinarySearchTree) -> bool:
-    return bst.x is None
+    return bst.bt is None
 
 
 def insert_helper(bt: BinTree, value: any, comes_before: Callable[[any, any], bool]) -> BinTree:
@@ -45,6 +45,11 @@ def look_up(bst: BinarySearchTree, a: any) -> bool:
     return BinarySearchTree(Node(10, None, None),)
 
 class TestBST(unittest.TestCase):
+    def test_is_empty(self):
+        tree = BinarySearchTree(None, compare)
+        check = is_empty(tree)
+        self.assertEqual(True, check)
+
     def test_insert(self):
         tree = BinarySearchTree(None, compare)
         tree = insert(tree, 10)
