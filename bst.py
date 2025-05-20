@@ -38,14 +38,15 @@ def insert_helper(bt: BinTree, value: any, comes_before: Callable[[any, any], bo
 
 
 def insert(bst: BinarySearchTree, value: any) -> BinarySearchTree:
-    new_tree = insert_helper(bst.x, value, bst.y)
-    return BinarySearchTree(new_tree, bst.y)
+    new_tree = insert_helper(bst.bt, value, bst.comes_before)
+    return BinarySearchTree(new_tree, bst.comes_before)
 
 def look_up(bst: BinarySearchTree, a: any) -> bool:
     return BinarySearchTree(Node(10, None, None),)
 
 class TestBST(unittest.TestCase):
     def test_insert(self):
-        tree = BinarySearchTree(None, comes_before)
+        tree = BinarySearchTree(None, compare)
         tree = insert(tree, 10)
-        self.assertEqual(tree, BinarySearchTree)
+        expected = BinarySearchTree(Node(10, None, None),compare)
+        self.assertEqual(tree, expected)
