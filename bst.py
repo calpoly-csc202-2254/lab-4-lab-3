@@ -2,6 +2,9 @@ import sys
 import unittest
 from typing import *
 from dataclasses import dataclass
+import time
+import random
+
 sys.setrecursionlimit(10**6)
 
 BinTree: TypeAlias = Union["Node", None]
@@ -49,6 +52,18 @@ def insert(bst: BinarySearchTree, value: any) -> BinarySearchTree:
 def look_up(bst: BinarySearchTree, a: any) -> bool:
     return BinarySearchTree(Node(10, None, None),)
 
+def look_up_helper(bt:BinTree, value:any, comes_before:Callable[[any, any], bool]) -> bool:
+    match bt:
+        case None:
+            return False
+        case Node(v, l, r):
+            if comes_before(value, v):
+                return look_up_helper(l, value, comes_before)
+            elif comes_before(v, value):
+                return look_up_helper(r, value, comes_before)
+            else:
+                return True
+
 # Helper function for delete
 def delete_helper(bt: BinTree, value: any, comes_before: Callable[[any, any], bool]) -> BinTree:
     match bt:
@@ -92,3 +107,21 @@ def find_min(bt: BinTree):
 def delete(bst:BinarySearchTree, value: any) -> BinarySearchTree:
     new_tree = delete_helper(bst.bt, value, bst.comes_before)
     return BinarySearchTree(new_tree, bst.comes_before)
+
+
+# Performance measurement
+def time_bst_insertion(size: int) -> float:
+    values = [random.random() for _ in range(size)]
+    tree = BinarySearchTree(None, compare)
+    start = time.perf_counter()
+    for v in values:
+        tree = insert(tree, v)
+    end = time.perf_counter()
+    return end - start
+
+for size in [100000 * i for i in range(1, 11)]:
+    total = 0
+    print("insertion")
+    for _ in range(1):
+        total += time_bst_insertion(size)
+    print(f"Size: {size}, Time: {total:.6f}")
