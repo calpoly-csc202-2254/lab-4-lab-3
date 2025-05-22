@@ -50,7 +50,7 @@ def insert(bst: BinarySearchTree, value: any) -> BinarySearchTree:
 # Function 3
 # Returns True if the value is stored in the tree and False otherwise.
 def look_up(bst: BinarySearchTree, a: any) -> bool:
-    return BinarySearchTree(Node(10, None, None),)
+    return look_up_helper(bst.bt, a, bst.comes_before)
 
 def look_up_helper(bt:BinTree, value:any, comes_before:Callable[[any, any], bool]) -> bool:
     match bt:
@@ -119,9 +119,20 @@ def time_bst_insertion(size: int) -> float:
     end = time.perf_counter()
     return end - start
 
+def time_bst_look_up(size: int) -> float:
+    values = [random.random() for _ in range(size)]
+    tree = BinarySearchTree(None, compare)
+    for v in values:
+        tree = insert(tree, v)
+    start = time.perf_counter()
+    search_values = [random.random() for _ in range(size)]
+    for v in search_values:
+        look_up(tree, v)
+    end = time.perf_counter()
+    return end - start
+
 for size in [100000 * i for i in range(1, 11)]:
     total = 0
-    print("insertion")
     for _ in range(1):
-        total += time_bst_insertion(size)
-    print(f"Size: {size}, Time: {total:.6f}")
+        total += time_bst_look_up(size)
+    print(f"{total:.6f}")

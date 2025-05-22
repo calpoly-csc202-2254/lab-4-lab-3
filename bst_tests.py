@@ -19,6 +19,10 @@ class BSTTests(unittest.TestCase):
         expected = BinarySearchTree(Node(10, None, None),compare)
         self.assertEqual(tree, expected)
 
+    def test_look_up(self):
+        tree = BinarySearchTree(Node(5, Node( 10, None, None), None), compare)
+
+
     def test_delete(self):
         tree= BinarySearchTree(Node(5, Node(3, None, None), Node(7, None,None)), compare)
         result = delete(tree, 3)
